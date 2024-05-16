@@ -22,12 +22,14 @@ To check whether patients had a current affiliation with these conditions in the
 
 To check whether patients had opted out, I used opt_out_9nu0_flag and opt_out_9nd19nu09nu4_flag. On researching this, I made the assumption that 9nu0 represented "Type 1 opt out", and 9nd19nu09nu4 as "Type 2". This information may be incorrect, but not much was found online in relation to these codes! dummy_patient_flag and date_of_death were used for checks also.
 
-The medications were retrieved through first finding them with their given SNOMED_concept_id, and codeids - and then using the overal refset_simple_id to retrieve all medicines that contain their ingredients. 
+The medications were retrieved through first finding them with their given SNOMED_concept_id, and codeids - and then using the overal refset_simple_id to retrieve all medicines that contain their ingredients. This was tested within python, and should exist within commits on this repo for more insight into the testing.
 
 The query itself looks for distinct registration IDs (no duplicated patients), accompanied with the patient ID, Full Name, postcode, age and gender. registration_guid is a constant within medication and observation tables to relate back to the patient tables, whilst we use clinical codes to retrieve codes for application with the requirements. 
 
 Chronologically, we eliminate the excluded patients from the study, whilst checking that they are current diagnoses. Then, we check whether the patient has a current asthma diagnosis, with the opt out checks built in here. From this, we check the medication prescriptions from this list of patients, rather than the overall database. Finally, we make sure the prescriptions have occured within the last 30 years, using recorded_date (As many other date columns included too few data entries to provide an accurate reading).
 
-The resulting table (shown in the XLSX Document) contains only 5 potential participants for the local research study. There is one participant for each of the top 5 postcode areas, however.
+The Query runs in 29.8 seconds, and the resulting table (shown in the XLSX Document) contains only 5 potential participants for the local research study. There is one participant for each of the top 5 postcode areas, however. 
+
+
 
 
