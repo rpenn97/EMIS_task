@@ -1,4 +1,6 @@
-SELECT DISTINCT(o.registration_guid),p.patient_id,p.patient_surname,p.patient_givenname,p.postcode,p.age,p.gender
+SELECT DISTINCT(o.registration_guid) AS 'Registration', p.patient_id AS 'Patient_ID',
+            p.patient_surname AS 'Surname', p.patient_givenname AS 'First Name',p.postcode AS 'Postcode',
+            p.age AS 'Age', p.gender AS 'Gender'
             FROM observation_table o
             INNER JOIN patient p ON (o.registration_guid = p.registration_guid)
             INNER JOIN clinical_codes c ON (o.emis_code_id = c.code_id)
